@@ -1,0 +1,144 @@
+@startuml
+object Sample_Dataset {
+  type: WideDataSet
+  name: Sample Dataset
+  physicalFileName: SimpleSample.csv
+}
+object datastructure {
+  type: WideDataStructure
+}
+object logicalRecord {
+  type: LogicalRecord
+}
+object Sample_Key {
+  type: PrimaryKey
+}
+object Sample_Key_Component {
+  type: PrimaryKeyComponent
+}
+object Sample_ID_Substantive_Value_Domain {
+  type: SubstantiveValueDomain
+  recommendedDataType: http://rdf_vocabulary.ddialliance.org/cv/DataType/1.1.2/#String
+}
+object Sample_ID {
+  type: InstanceVariable
+  type: RepresentedVariable
+  name: Sample ID
+  definition: Sample Identifier
+}
+object Mass_Substantive_Value_Domain {
+  type: SubstantiveValueDomain
+  recommendedDataType: http://rdf_vocabulary.ddialliance.org/cv/DataType/1.1.2/#Double
+}
+object Mass {
+  type: InstanceVariable
+  type: RepresentedVariable
+  name: Mass
+  definition: Mass of Sample in Grams
+}
+object Volume_Substantive_Value_Domain {
+  type: SubstantiveValueDomain
+  recommendedDataType: http://rdf_vocabulary.ddialliance.org/cv/DataType/1.1.2/#Double
+}
+object Volume {
+  type: InstanceVariable
+  type: RepresentedVariable
+  name: Volume
+  definition: Volume of Sample in Cubic Centimeters
+}
+object Measurement_Date_Substantive_Value_Domain {
+  type: SubstantiveValueDomain
+  recommendedDataType: http://rdf_vocabulary.ddialliance.org/cv/DataType/1.1.2/#Date
+}
+object Measurement_Date {
+  type: InstanceVariable
+  type: RepresentedVariable
+  name: Measurement Date
+  definition: Date of Measurement
+}
+object Sample_ID_Component {
+  type: IdentifierComponent
+}
+object Mass_Component {
+  type: MeasureComponent
+}
+object Volume_Component {
+  type: MeasureComponent
+}
+object Measurement_Date_Component {
+  type: AttributeComponent
+}
+object physicalSegmentLayout {
+  type: PhysicalSegmentLayout
+  isDelimited: true
+  delimiter: ,
+  hasHeader: true
+  headerRowCount: 1
+}
+object valueMapping_Sample_ID {
+  type: valueMapping
+}
+object valueMapping_Mass {
+  type: valueMapping
+}
+object valueMapping_Volume {
+  type: valueMapping
+}
+object valueMapping_Measurement_Date {
+  type: valueMapping
+}
+object valueMappingPosition_Sample_ID {
+  type: valueMappingPosition
+  value: 1
+}
+object valueMappingPosition_Mass {
+  type: valueMappingPosition
+  value: 2
+}
+object valueMappingPosition_Volume {
+  type: valueMappingPosition
+  value: 3
+}
+object valueMappingPosition_Measurement_Date {
+  type: valueMappingPosition
+  value: 4
+}
+Sample_Dataset --> datastructure : isStructuredBy
+datastructure --> Sample_Key : has
+datastructure --> Sample_ID_Component : has
+datastructure --> Mass_Component : has
+datastructure --> Volume_Component : has
+datastructure --> Measurement_Date_Component : has
+logicalRecord --> Sample_Dataset : has
+logicalRecord --> Sample_ID : has
+logicalRecord --> Mass : has
+logicalRecord --> Volume : has
+logicalRecord --> Measurement_Date : has
+Sample_Key --> Sample_Key_Component : isComposedOf
+Sample_Key_Component --> Sample_ID_Component : correspondsTo
+Sample_ID --> Sample_ID_Substantive_Value_Domain : takesSubstantiveValuesFrom
+Mass --> Mass_Substantive_Value_Domain : takesSubstantiveValuesFrom
+Volume --> Volume_Substantive_Value_Domain : takesSubstantiveValuesFrom
+Measurement_Date --> Measurement_Date_Substantive_Value_Domain : takesSubstantiveValuesFrom
+Sample_ID_Component --> Sample_ID : isDefinedBy
+Mass_Component --> Mass : isDefinedBy
+Volume_Component --> Volume : isDefinedBy
+Measurement_Date_Component --> Measurement_Date : isDefinedBy
+physicalSegmentLayout --> logicalRecord : formats
+physicalSegmentLayout --> valueMapping_Sample_ID : has
+physicalSegmentLayout --> valueMapping_Mass : has
+physicalSegmentLayout --> valueMapping_Volume : has
+physicalSegmentLayout --> valueMapping_Measurement_Date : has
+physicalSegmentLayout --> valueMappingPosition_Sample_ID : has
+physicalSegmentLayout --> valueMappingPosition_Mass : has
+physicalSegmentLayout --> valueMappingPosition_Volume : has
+physicalSegmentLayout --> valueMappingPosition_Measurement_Date : has
+valueMappingPosition_Sample_ID --> valueMapping_Sample_ID : indexes
+valueMappingPosition_Mass --> valueMapping_Mass : indexes
+valueMappingPosition_Volume --> valueMapping_Volume : indexes
+valueMappingPosition_Measurement_Date --> valueMapping_Measurement_Date : indexes
+valueMapping_Sample_ID --> Sample_ID : formats
+valueMapping_Mass --> Mass : formats
+valueMapping_Volume --> Volume : formats
+valueMapping_Measurement_Date --> Measurement_Date : formats
+@enduml
